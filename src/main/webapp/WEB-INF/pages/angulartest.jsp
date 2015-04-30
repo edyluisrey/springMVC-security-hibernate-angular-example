@@ -3,7 +3,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Spring MVC AngularJS demo</title>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/angular.min.js"></script>
 <script>
 
     var app = angular.module('myApp', []);
