@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.taller.model.Employee;
 import org.taller.model.Person;
 import org.taller.model.Status;
@@ -52,7 +54,7 @@ public class RestPersonController {
 			  return person;  
 		 }
 	    
-	    @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)  
+	    @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)  
 		 public @ResponseBody  Status deletePerson(@PathVariable("id") int id) {  	  
 			  try { 
 				  personService.removePerson(id); 
@@ -61,6 +63,12 @@ public class RestPersonController {
 			   return new Status(0, e.toString());  
 			  }  	  
 		 }
+	    
+	    @RequestMapping(value = "update/{userId}", method = RequestMethod.PUT)
+	    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+	    public void update(@PathVariable("id") int id, @RequestBody Person p) {
+	    	this.personService.updatePerson(p);
+	    }
 	    
 	    /* Submit form in Spring Restful Services */  
 		 @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)  

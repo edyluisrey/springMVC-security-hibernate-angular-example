@@ -38,7 +38,7 @@ angular.module('personController', [])
 				.success(function(data) {
 					$scope.loading = false;
 					$scope.formPerson=false;
-					//$scope.persons = data; 
+					$scope.persons = data; 
 				});
 		};
 		
